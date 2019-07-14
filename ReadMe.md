@@ -43,6 +43,6 @@
 
 ## 下一步解决的问题
 
-1 如何记录日志，能否借助aop；
-2 如何做登录验证，目前的方法是存储在前端的session中；
-3 如何完善DAO，service,controller
+1 如何记录日志，能否借助aop；<br>
+2 如何做登录验证，目前的方法是存储在前端的session中；<br>
+3 如何完善DAO，service,controller <br>
