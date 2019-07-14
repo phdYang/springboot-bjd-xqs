@@ -1,9 +1,10 @@
 package com.bjd515.bjdxqs.controller;
 
+import com.bjd515.bjdxqs.Vo.DataVO;
+import com.bjd515.bjdxqs.Vo.ResultVO;
 import com.bjd515.bjdxqs.model.Sensor;
-import com.bjd515.bjdxqs.service.SensorService;
+import com.bjd515.bjdxqs.service.impl.SensorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 //@RequestMapping("/sensor")
 public class SensorController {
     @Autowired
-    private SensorService sensorService;
+    private SensorServiceImpl sensorService;
 
     /**
      * 获取全部传感器
@@ -27,8 +28,15 @@ public class SensorController {
      * @test yes
      */
     @PostMapping("/getSensor")
-    public String getSensor() {
-        return sensorService.getSensor();
+    public ResultVO<DataVO> getSensor() {
+        DataVO dataVO = new DataVO();
+        dataVO.setData(sensorService.getSensor());
+        dataVO.setTotal_count(sensorService.getSensor().size());
+        ResultVO<DataVO> result = new ResultVO<>();
+        result.setCode(0);
+        result.setMsg("成功");
+        result.setResult(dataVO);
+        return result;
     }
 
     /**
