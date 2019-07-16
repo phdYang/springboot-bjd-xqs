@@ -28,9 +28,13 @@ public class Sensor {
     private float bdWave;
     private float bdTemperature;
     private String info;
-    private float sDesc;
+    private String sDesc;
+    private int isValid;
 
-    public Sensor(int sensorId, int targetId, int sectionId, int typeId, int sensorItemId, String sensorItemName, String sensorName, String targetName, String sectionName, String typeName, String channelCode, String sensorCode, float initKValue, float initWave, int initOrientations, float bdWave, float bdTemperature, String info, float sDesc) {
+    public Sensor() {
+    }
+
+    public Sensor(int sensorId, int targetId, int sectionId, int typeId, int sensorItemId, String sensorItemName, String sensorName, String targetName, String sectionName, String typeName, String channelCode, String sensorCode, float initKValue, float initWave, int initOrientations, float bdWave, float bdTemperature, String info, String sDesc, int isValid) {
         this.sensorId = sensorId;
         this.targetId = targetId;
         this.sectionId = sectionId;
@@ -50,9 +54,7 @@ public class Sensor {
         this.bdTemperature = bdTemperature;
         this.info = info;
         this.sDesc = sDesc;
-    }
-
-    public Sensor() {
+        this.isValid = isValid;
     }
 
     public int getSensorId() {
@@ -135,6 +137,22 @@ public class Sensor {
         this.typeName = typeName;
     }
 
+    public String getChannelCode() {
+        return channelCode;
+    }
+
+    public void setChannelCode(String channelCode) {
+        this.channelCode = channelCode;
+    }
+
+    public String getSensorCode() {
+        return sensorCode;
+    }
+
+    public void setSensorCode(String sensorCode) {
+        this.sensorCode = sensorCode;
+    }
+
     public float getInitKValue() {
         return initKValue;
     }
@@ -183,27 +201,45 @@ public class Sensor {
         this.info = info;
     }
 
-    public float getsDesc() {
+    public String getsDesc() {
         return sDesc;
     }
 
-    public void setsDesc(float sDesc) {
+    public void setsDesc(String sDesc) {
         this.sDesc = sDesc;
     }
 
-    public String getChannelCode() {
-        return channelCode;
+    public int getIsValid() {
+        return isValid;
     }
 
-    public void setChannelCode(String channelCode) {
-        this.channelCode = channelCode;
+    public void setIsValid(int isValid) {
+        this.isValid = isValid;
     }
 
-    public String getSensorCode() {
-        return sensorCode;
-    }
-
-    public void setSensorCode(String sensorCode) {
-        this.sensorCode = sensorCode;
+    @Override
+    public String toString() {
+        return "Sensor{" +
+                "sensorId=" + sensorId +
+                ", targetId=" + targetId +
+                ", sectionId=" + sectionId +
+                ", typeId=" + typeId +
+                ", sensorItemId=" + sensorItemId +
+                ", sensorItemName='" + sensorItemName + '\'' +
+                ", sensorName='" + sensorName + '\'' +
+                ", targetName='" + targetName + '\'' +
+                ", sectionName='" + sectionName + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", channelCode='" + channelCode + '\'' +
+                ", sensorCode='" + sensorCode + '\'' +
+                ", initKValue=" + initKValue +
+                ", initWave=" + initWave +
+                ", initOrientations=" + initOrientations +
+                ", bdWave=" + bdWave +
+                ", bdTemperature=" + bdTemperature +
+                ", info='" + info + '\'' +
+                ", sDesc='" + sDesc + '\'' +
+                ", isValid=" + isValid +
+                '}';
     }
 }

@@ -1,9 +1,10 @@
 package com.bjd515.bjdxqs.controller;
 
 import com.bjd515.bjdxqs.Vo.DataVO;
+import com.bjd515.bjdxqs.Vo.ObjVO;
 import com.bjd515.bjdxqs.Vo.ResultVO;
 import com.bjd515.bjdxqs.model.Sensor;
-import com.bjd515.bjdxqs.service.impl.SensorServiceImpl;
+import com.bjd515.bjdxqs.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,15 @@ import org.springframework.web.bind.annotation.*;
  * @Created by zhaoyang
  * @Date 2019/1/17 14:29
  * @Changed by chenghuayu
+ * @Date 2019/7/16 18:50
+ * @Changed by zhaoyang
  * /getSensor
  */
 @RestController
-//@RequestMapping("/sensor")
 public class SensorController {
+
     @Autowired
-    private SensorServiceImpl sensorService;
+    private SensorService sensorService;
 
     /**
      * 获取全部传感器
@@ -31,7 +34,7 @@ public class SensorController {
     public ResultVO<DataVO> getSensor() {
         DataVO dataVO = new DataVO();
         dataVO.setData(sensorService.getSensor());
-        dataVO.setTotal_count(sensorService.getSensor().size());
+        dataVO.setTotal_count(sensorService.getSensorTotal());
         ResultVO<DataVO> result = new ResultVO<>();
         result.setCode(0);
         result.setMsg("成功");
@@ -46,9 +49,17 @@ public class SensorController {
      *
      * @test yes
      */
-    @PostMapping("/api/getSensorByOther")
-    public String getSensorByOther(Sensor sensor) {
-        return sensorService.getSensorByOther(sensor);
+    @PostMapping("/getSensorByOther")
+    public ResultVO<DataVO> getSensorByOther(Sensor sensor) {
+
+        DataVO dataVO = new DataVO();
+        dataVO.setData(sensorService.getSensorByOther(sensor));
+        dataVO.setTotal_count(sensorService.getSensorByOtherTotal(sensor));
+        ResultVO<DataVO> result = new ResultVO<>();
+        result.setCode(0);
+        result.setMsg("成功");
+        result.setResult(dataVO);
+        return result;
     }
 
     /**
@@ -58,20 +69,39 @@ public class SensorController {
      *
      * @test
      */
-    @GetMapping("/api/addSensor")
-    public String sensorAdd(Sensor sensor) {
-        return sensorService.sensorAdd(sensor);
+    @GetMapping("/addSensor")
+    public ResultVO<ObjVO> sensorAdd(Sensor sensor) {
+        // isValid
+        sensor.setIsValid(1);
+        ResultVO result = new ResultVO();
+        int rs = sensorService.sensorAdd(sensor);
+        if (rs>0){
+            result.setCode(0);
+            result.setMsg("增加成功");
+            result.setResult(null);
+        }else {
+            result.setCode(1);
+            result.setMsg("增加失败");
+            result.setResult(null);
+        }
+        return result;
     }
 
     /**
-     * @test yes
      *
      * @param sensor
      * @return
+     *  @test yes
      */
-    @GetMapping("/api/getSensorDetail")
-    public String getDetailList(Sensor sensor) {
-        return sensorService.getSensorDetail(sensor);
+    @GetMapping("/getSensorDetail")
+    public ResultVO<ObjVO> getDetailList(Sensor sensor) {
+        ObjVO objVO = new ObjVO();
+        objVO.setData(sensorService.getSensorDetail(sensor));
+        ResultVO<ObjVO> result = new ResultVO<>();
+        result.setCode(0);
+        result.setMsg("成功");
+        result.setResult(objVO);
+        return result;
     }
 
     /**
@@ -79,19 +109,47 @@ public class SensorController {
      * @param sensor
      * @return
      */
-    @GetMapping("/api/getSensorEdit")
-    public String getEditList(Sensor sensor) {
-        return sensorService.getSensorEdit(sensor);
+    @GetMapping("/getSensorEdit")
+    public ResultVO<ObjVO> getEditList(Sensor sensor) {
+        ObjVO objVO = new ObjVO();
+        objVO.setData(sensorService.getSensorEdit(sensor));
+        ResultVO<ObjVO> result = new ResultVO<>();
+        result.setCode(0);
+        result.setMsg("成功");
+        result.setResult(objVO);
+        return result;
     }
 
-    @GetMapping("/api/editSensor")
-    public String sensorEdited(Sensor sensor) {
-        return sensorService.sensorEdited(sensor);
+    @PostMapping("/editSensor")
+    public  ResultVO<ObjVO> sensorEdited(Sensor sensor) {
+        ResultVO result = new ResultVO();
+        int rs = sensorService.sensorEdited(sensor);
+        if (rs>0){
+            result.setCode(0);
+            result.setMsg("修改成功");
+            result.setResult(null);
+        }else {
+            result.setCode(1);
+            result.setMsg("修改失败");
+            result.setResult(null);
+        }
+        return result;
     }
 
-    @GetMapping("/api/delSensor")
-    public String sensorDel(Sensor sensor) {
-        return sensorService.sensorDel(sensor);
+    @GetMapping("/delSensor")
+    public ResultVO<ObjVO> sensorDel(Sensor sensor) {
+        ResultVO result = new ResultVO();
+        int rs = sensorService.sensorDel(sensor);
+        if (rs>0){
+            result.setCode(0);
+            result.setMsg("删除成功");
+            result.setResult(null);
+        }else {
+            result.setCode(1);
+            result.setMsg("删除失败");
+            result.setResult(null);
+        }
+        return result;
     }
 
 }

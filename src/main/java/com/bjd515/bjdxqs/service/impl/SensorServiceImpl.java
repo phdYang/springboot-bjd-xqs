@@ -17,6 +17,8 @@ import java.util.List;
  * @Created by zhaoyang
  * @Date 2019/1/17 14:29
  * @Changed by chenghuayu
+ * @Date 2019/7/16 18:50
+ * @Changed by zhaoyang
  * getSensor
  */
 @Service
@@ -30,140 +32,43 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public String getSensorByOther(Sensor sensor) {
-        String rs = "";
-        int code;
-        String msg;
-        String result;
-        String data;
-        JSONObject jsonObject = new JSONObject();
-        //Sensor sensor = JSON.parseObject(json,Sensor.class);
-        List<Sensor> list = sensorMapper.getSensorByOther(sensor);
-        int total = sensorMapper.getSensorByOtherTotal(sensor);
-        if(list != null) {
-            jsonObject.put("data",list);
-            jsonObject.put("total_count",total);
-            result = jsonObject.toJSONString();
-            msg = "success";
-            code = 0;
-        }else {
-            result = "{}";
-            code = 1;
-            msg = "'没有查询到相关数据";
-        }
-        rs = JsonUtilsMy.packJson(code,msg,result);
-        return rs;
+    public int getSensorTotal(){
+        return sensorMapper.getSensorTotal();
     }
 
     @Override
-    public String sensorAdd(Sensor sensor) {
-        String rs = "";
-        int code;
-        String msg;
-        String result;
-        //Sensor sensor = JSON.parseObject(json,Sensor.class);
-        int ret = sensorMapper.sensorAdd(sensor);
-        if(ret > 0) {
-            result = "{}";
-            msg = "success";
-            code = 0;
-        }else {
-            result = "{}";
-            code = 1;
-            msg = "'failed";
-        }
-        rs = JsonUtilsMy.packJson(code,msg,result);
-        return rs;
+    public List<Sensor> getSensorByOther(Sensor sensor) {
+        return sensorMapper.getSensorByOther(sensor);
     }
 
     @Override
-    public String getSensorDetail(Sensor sensor) {
-        String rs = "";
-        int code;
-        String msg;
-        String result;
-        String data;
-        JSONObject jsonObject = new JSONObject();
-        //Sensor sensor = JSON.parseObject(json,Sensor.class);
-        Sensor list = sensorMapper.getSensorDetail(sensor);
-        if(list != null) {
-            jsonObject.put("data",list);
-            result = jsonObject.toJSONString();
-            msg = "success";
-            code = 0;
-        }else {
-            result = "{}";
-            code = 1;
-            msg = "'没有查询到相关数据";
-        }
-        rs = JsonUtilsMy.packJson(code,msg,result);
-        return rs;
+    public int getSensorByOtherTotal(Sensor sensor) {
+        return sensorMapper.getSensorByOtherTotal(sensor);
     }
 
     @Override
-    public String getSensorEdit(Sensor sensor) {
-        String rs = "";
-        int code;
-        String msg;
-        String result;
-        String data;
-        JSONObject jsonObject = new JSONObject();
-        //Sensor sensor = JSON.parseObject(json,Sensor.class);
-        Sensor list = sensorMapper.getSensorEdit(sensor);
-        if(list != null) {
-            jsonObject.put("data",list);
-            result = jsonObject.toJSONString();
-            msg = "success";
-            code = 0;
-        }else {
-            result = "{}";
-            code = 1;
-            msg = "'没有查询到相关数据";
-        }
-        rs = JsonUtilsMy.packJson(code,msg,result);
-        return rs;
+    public int sensorAdd(Sensor sensor) {
+        return sensorMapper.sensorAdd(sensor);
     }
 
     @Override
-    public String sensorEdited(Sensor sensor) {
-        String rs = "";
-        int code;
-        String msg;
-        String result;
-        //Sensor sensor = JSON.parseObject(json,Sensor.class);
-        int ret = sensorMapper.sensorEdited(sensor);
-        if(ret > 0) {
-            result = "{}";
-            msg = "success";
-            code = 0;
-        }else {
-            result = "{}";
-            code = 1;
-            msg = "'failed";
-        }
-        rs = JsonUtilsMy.packJson(code,msg,result);
-        return rs;
+    public Sensor getSensorDetail(Sensor sensor) {
+        return sensorMapper.getSensorDetail(sensor);
     }
 
     @Override
-    public String sensorDel(Sensor sensor) {
-        String rs = "";
-        int code;
-        String msg;
-        String result;
-        //Sensor sensor = JSON.parseObject(json,Sensor.class);
-        int ret = sensorMapper.sensorDel(sensor);
-        if(ret > 0) {
-            result = "{}";
-            msg = "success";
-            code = 0;
-        }else {
-            result = "{}";
-            code = 1;
-            msg = "'failed";
-        }
-        rs = JsonUtilsMy.packJson(code,msg,result);
-        return rs;
+    public Sensor getSensorEdit(Sensor sensor) {
+        return sensorMapper.getSensorEdit(sensor);
+    }
+
+    @Override
+    public int sensorEdited(Sensor sensor) {
+        return sensorMapper.sensorEdited(sensor);
+    }
+
+    @Override
+    public int sensorDel(Sensor sensor) {
+        return sensorMapper.sensorDel(sensor);
     }
 
 }

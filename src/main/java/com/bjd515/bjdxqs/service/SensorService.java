@@ -9,17 +9,21 @@ public interface SensorService {
 
     public List<Sensor> getSensor();
 
-    public String getSensorByOther(Sensor sensor) ;
+    public int getSensorTotal();
 
-    public String sensorAdd(Sensor sensor) ;
+    public List<Sensor> getSensorByOther(Sensor sensor) ;
 
-    public String getSensorDetail(Sensor sensor) ;
+    public int getSensorByOtherTotal(Sensor sensor);
 
-    public String getSensorEdit(Sensor sensor) ;
+    public int sensorAdd(Sensor sensor) ;
+
+    public Sensor getSensorDetail(Sensor sensor) ;
+
+    public Sensor getSensorEdit(Sensor sensor) ;
 
 
-    public String sensorEdited(Sensor sensor) ;
+    public int sensorEdited(Sensor sensor) ;
 
-    public String sensorDel(Sensor sensor) ;
+    public int sensorDel(Sensor sensor) ;
 
 }
