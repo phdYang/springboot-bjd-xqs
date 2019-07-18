@@ -19,8 +19,8 @@ import java.util.List;
 @Mapper
 public interface DeviceMapper {
 
-    @Select("SELECT deviceId, deviceFre,deviceName,deviceIp,channelCount,isValid,sDesc" +
-            " FROM t_device")
+    @Select("SELECT *" +
+            " FROM t_device WHERE isValid = 1")
     public List<Device> getDevice();
 
     @Select("SELECT COUNT(*) from t_device")

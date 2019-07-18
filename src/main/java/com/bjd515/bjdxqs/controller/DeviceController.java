@@ -1,9 +1,10 @@
 package com.bjd515.bjdxqs.controller;
 
+import com.bjd515.bjdxqs.Vo.DataVO;
+import com.bjd515.bjdxqs.Vo.ResultVO;
 import com.bjd515.bjdxqs.model.Device;
 import com.bjd515.bjdxqs.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -27,8 +28,16 @@ public class DeviceController {
      * @test yes
      */
     @PostMapping("/getDevice")
-    public String getDevice() {
-        return deviceService.getDevice();
+    public ResultVO<DataVO> getDevice() {
+        ResultVO<DataVO> result = new ResultVO<>();
+        DataVO dataVO = new DataVO();
+        dataVO.setTotal_count(deviceService.getDeviceTotal());
+        dataVO.setData(deviceService.getDevice());
+
+        result.setCode(0);
+        result.setMsg("成功");
+        result.setResult(dataVO);
+        return result;
     }
 
     /**
