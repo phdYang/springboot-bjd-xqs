@@ -12,6 +12,14 @@ import java.util.Date;
  * @Created by zhaoyang
  */
 public class DateUtilsMy {
+
+
+
+    public static String getTimeStr(String str){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        str = sdf.format(str);
+        return str;
+    }
     /**
      * 获得系统当前时间 yyyy-MM-dd HH:mm:ss
      * @return

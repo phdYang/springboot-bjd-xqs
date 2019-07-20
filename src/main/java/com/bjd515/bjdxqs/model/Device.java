@@ -24,7 +24,7 @@ public class Device {
 
     private int isValid;
 
-    private float sDesc;
+    private String sDesc;
 
 
 }

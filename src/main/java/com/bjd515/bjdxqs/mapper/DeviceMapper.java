@@ -23,18 +23,18 @@ public interface DeviceMapper {
             " FROM t_device WHERE isValid = 1")
     public List<Device> getDevice();
 
-    @Select("SELECT COUNT(*) from t_device")
+    @Select("SELECT COUNT(*) from t_device WHERE isValid = 1")
     public int getDeviceTotal();
 
-    @Select("SELECT deviceId, deviceFre,deviceName,deviceIp,channelCount,isValid,sDesc" +
+    @Select("SELECT * " +
             " FROM t_device" +
-            " WHERE deviceName=#{deviceName} ")
-    public List<Device> getDeviceByOther(Device device);
+            " WHERE deviceName=#{1} AND isValid = 1")
+    public List<Device> getDeviceByOther(String deviceName);
 
-    @Select("SELECT count(*) FROM t_device WHERE deviceName=#{deviceName}")
-    public int getDeviceByOtherTotal(Device device);
+    @Select("SELECT count(*) FROM t_device WHERE deviceName=#{1} AND isValid = 1")
+    public int getDeviceByOtherTotal(String deviceName);
 
-    @Insert("INSERT INTO t_device set deviceFre=#{deviceFre},deviceName=#{deviceName},deviceIp=#{deviceIp},channelCount=#{channelCount},isValid=#{isValid},sDesc=#{sDesc} ")
+    @Insert("INSERT INTO t_device set deviceCode=#{deviceCode},deviceFre=#{deviceFre},deviceName=#{deviceName},deviceIp=#{deviceIp},deviceDate=#{deviceDate},channelCount=#{channelCount},isValid=#{isValid},sDesc=#{sDesc} ")
     public int deviceAdd(Device device);
 
 

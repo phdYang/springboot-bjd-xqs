@@ -12,9 +12,11 @@ public interface DeviceService {
 
     public int getDeviceTotal();
 
-    public String getDeviceByOther(Device device);
+    public List<Device> getDeviceByOther(String deviceName);
 
-    public String deviceAdd(Device device) ;
+    public int getDeviceByOtherTotal(String deviceName);
+
+    public int deviceAdd(Device device) ;
 
     public String getDeviceDetail(Device device) ;
 

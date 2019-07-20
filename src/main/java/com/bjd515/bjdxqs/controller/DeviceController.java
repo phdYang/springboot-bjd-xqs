@@ -1,9 +1,11 @@
 package com.bjd515.bjdxqs.controller;
 
 import com.bjd515.bjdxqs.Vo.DataVO;
+import com.bjd515.bjdxqs.Vo.ObjVO;
 import com.bjd515.bjdxqs.Vo.ResultVO;
 import com.bjd515.bjdxqs.model.Device;
 import com.bjd515.bjdxqs.service.DeviceService;
+import com.bjd515.bjdxqs.utils.DateUtilsMy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +25,7 @@ public class DeviceController {
     private DeviceService deviceService;
 
     /**
-     * 获取全部传感器
+     * 获取全部device
      * @return
      * @test yes
      */
@@ -42,14 +44,22 @@ public class DeviceController {
 
     /**
      *
-     * @param device
+     * @param
      * @return
      *
      * @test yes
      */
-    @PostMapping("/api/getDeviceByOther")
-    public String getDeviceByOther(Device device) {
-        return deviceService.getDeviceByOther(device);
+    @PostMapping("/getDeviceByOther")
+    public ResultVO<DataVO> getDeviceByOther(String deviceName) {
+        ResultVO<DataVO> result = new ResultVO<>();
+        DataVO dataVO = new DataVO();
+        dataVO.setTotal_count(deviceService.getDeviceByOtherTotal(deviceName));
+        dataVO.setData(deviceService.getDeviceByOther(deviceName));
+
+        result.setCode(0);
+        result.setMsg("成功");
+        result.setResult(dataVO);
+        return result;
     }
 
     /**
@@ -59,9 +69,27 @@ public class DeviceController {
      *
      * @test
      */
-    @GetMapping("/api/addDevice")
-    public String deviceAdd(Device device) {
-        return deviceService.deviceAdd(device);
+    @GetMapping("/addDevice")
+    public ResultVO<ObjVO> deviceAdd(Device device) {
+        ResultVO<ObjVO> result = new ResultVO<>();
+        ObjVO<Integer> objVO = new ObjVO<>();
+        System.out.println(device);
+
+        //生成随机数
+        device.setDeviceCode(DateUtilsMy.getTimeStap());
+        device.setIsValid(1);
+        int count = deviceService.deviceAdd(device);
+        objVO.setData(count);
+        if(count>0){
+            result.setCode(0);
+            result.setMsg("增加成功");
+            result.setResult(objVO);
+        }else {
+            result.setCode(0);
+            result.setMsg("增加失败");
+            result.setResult(objVO);
+        }
+        return result;
     }
 
     /**
