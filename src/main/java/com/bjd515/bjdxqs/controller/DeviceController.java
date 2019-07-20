@@ -73,8 +73,6 @@ public class DeviceController {
     public ResultVO<ObjVO> deviceAdd(Device device) {
         ResultVO<ObjVO> result = new ResultVO<>();
         ObjVO<Integer> objVO = new ObjVO<>();
-        System.out.println(device);
-
         //生成随机数
         device.setDeviceCode(DateUtilsMy.getTimeStap());
         device.setIsValid(1);
@@ -85,7 +83,7 @@ public class DeviceController {
             result.setMsg("增加成功");
             result.setResult(objVO);
         }else {
-            result.setCode(0);
+            result.setCode(1);
             result.setMsg("增加失败");
             result.setResult(objVO);
         }
@@ -98,9 +96,16 @@ public class DeviceController {
      * @param device
      * @return
      */
-    @GetMapping("/api/getDeviceDetail")
-    public String getDetailList(Device device) {
-        return deviceService.getDeviceDetail(device);
+    @GetMapping("/getDeviceDetail")
+    public ResultVO<ObjVO> getDeviceDetail(Device device) {
+        ResultVO<ObjVO> result = new ResultVO<>();
+        ObjVO<Device> objVO = new ObjVO<>();
+        objVO.setData(deviceService.getDeviceDetail(device));
+
+        result.setCode(0);
+        result.setMsg("查询成功");
+        result.setResult(objVO);
+        return result;
     }
 
     /**
@@ -108,19 +113,52 @@ public class DeviceController {
      * @param device
      * @return
      */
-    @GetMapping("/api/getDeviceEdit")
-    public String getEditList(Device device) {
-        return deviceService.getDeviceEdit(device);
+    @GetMapping("/getDeviceEdit")
+    public ResultVO<ObjVO> getEditList(Device device) {
+        ResultVO<ObjVO> result = new ResultVO<>();
+        ObjVO<Device> objVO = new ObjVO<>();
+        objVO.setData(deviceService.getDeviceEdit(device));
+
+        result.setCode(0);
+        result.setMsg("查询成功");
+        result.setResult(objVO);
+        return result;
     }
 
-    @GetMapping("/api/editDevice")
-    public String deviceEdited(Device device) {
-        return deviceService.deviceEdited(device);
+    @GetMapping("/editDevice")
+    public ResultVO<ObjVO> deviceEdited(Device device) {
+        ResultVO<ObjVO> result = new ResultVO<>();
+        ObjVO<Integer> objVO = new ObjVO<>();
+        int count = deviceService.deviceEdited(device);
+        objVO.setData(count);
+        if(count>0){
+            result.setCode(0);
+            result.setMsg("修改成功");
+            result.setResult(objVO);
+        }else {
+            result.setCode(1);
+            result.setMsg("修改失败");
+            result.setResult(objVO);
+        }
+        return result;
     }
 
-    @GetMapping("/api/delDevice")
-    public String deviceDel(Device device) {
-        return deviceService.deviceDel(device);
+    @GetMapping("/delDevice")
+    public ResultVO<ObjVO> deviceDel(Device device) {
+        ResultVO<ObjVO> result = new ResultVO<>();
+        ObjVO<Integer> objVO = new ObjVO<>();
+        int count = deviceService.deviceDel(device);
+        objVO.setData(count);
+        if(count>0){
+            result.setCode(0);
+            result.setMsg("删除成功");
+            result.setResult(objVO);
+        }else {
+            result.setCode(1);
+            result.setMsg("删除失败");
+            result.setResult(objVO);
+        }
+        return result;
     }
 
 }

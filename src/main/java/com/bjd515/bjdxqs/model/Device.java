@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class Device {
 
-
     private int deviceId;
 
     private String deviceCode;
@@ -24,7 +23,7 @@ public class Device {
 
     private int isValid;
 
-    private String sDesc;
+    private String sdesc;
 
 
 }

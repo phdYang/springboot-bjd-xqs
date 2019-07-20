@@ -18,12 +18,12 @@ public interface DeviceService {
 
     public int deviceAdd(Device device) ;
 
-    public String getDeviceDetail(Device device) ;
+    public Device getDeviceDetail(Device device) ;
 
-    public String getDeviceEdit(Device device) ;
+    public Device getDeviceEdit(Device device) ;
 
 
-    public String deviceEdited(Device device);
+    public int deviceEdited(Device device);
 
-    public String deviceDel(Device device) ;
+    public int deviceDel(Device device) ;
 }

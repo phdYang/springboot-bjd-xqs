@@ -34,23 +34,23 @@ public interface DeviceMapper {
     @Select("SELECT count(*) FROM t_device WHERE deviceName=#{1} AND isValid = 1")
     public int getDeviceByOtherTotal(String deviceName);
 
-    @Insert("INSERT INTO t_device set deviceCode=#{deviceCode},deviceFre=#{deviceFre},deviceName=#{deviceName},deviceIp=#{deviceIp},deviceDate=#{deviceDate},channelCount=#{channelCount},isValid=#{isValid},sDesc=#{sDesc} ")
+    @Insert("INSERT INTO t_device set deviceUse=#{deviceUse},deviceCode=#{deviceCode},deviceFre=#{deviceFre},deviceName=#{deviceName},deviceIp=#{deviceIp},deviceDate=#{deviceDate},channelCount=#{channelCount},isValid=#{isValid},sdesc=#{sdesc} ")
     public int deviceAdd(Device device);
 
 
-    @Select("SELECT deviceId, deviceFre,deviceName,deviceIp,channelCount,isValid,sDesc" +
+    @Select("SELECT * " +
             " FROM t_device" +
             " WHERE deviceId=#{deviceId}")
     public Device getDeviceDetail(Device device);
 
 
-    @Select("SELECT deviceId, deviceFre,deviceName,deviceIp,channelCount,isValid,sDesc" +
+    @Select("SELECT * " +
             " FROM t_device" +
             " WHERE deviceId=#{deviceId}")
     public Device getDeviceEdit(Device device);
 
 
-    @Update("UPDATE t_device set deviceFre=#{deviceFre},deviceName=#{deviceName},deviceIp=#{deviceIp},channelCount=#{channelCount},isValid=#{isValid},sDesc=#{sDesc} " +
+    @Update("UPDATE t_device set deviceUse=#{deviceUse},deviceFre=#{deviceFre},deviceName=#{deviceName},deviceIp=#{deviceIp},channelCount=#{channelCount},sdesc=#{sdesc},deviceDate=#{deviceDate} " +
             " WHERE deviceId=#{deviceId}")
     public int deviceEdited(Device device);
 

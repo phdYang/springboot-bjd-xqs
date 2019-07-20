@@ -40,7 +40,7 @@ public interface SensorMapper {
     @Insert("INSERT INTO t_sensor set sensorCode=#{sensorCode}, sensorName=#{sensorName},channelCode=#{channelCode},typeId=#{typeId}," +
             "targetId=#{targetId},sectionId=#{sectionId},initKValue=#{initKValue},initValue=#{initKValue}," +
             "initWave=#{initWave},initOrientations=#{initOrientations},bdWave=#{bdWave}, bdTemperature=#{bdTemperature}," +
-            " isValid=#{isValid}")
+            " info=#{info},sDesc=#{sDesc},isValid=#{isValid}")
     public int sensorAdd(Sensor sensor);
 
 
