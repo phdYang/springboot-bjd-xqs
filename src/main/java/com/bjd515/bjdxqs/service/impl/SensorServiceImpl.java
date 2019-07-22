@@ -95,17 +95,20 @@ public class SensorServiceImpl implements SensorService {
             List<TreeVO> childList = new ArrayList<>();
 
             int itemId = sensorItem.getItemId();
+
+            int jCount = 0;
             for (int j = 0; j < sensorList.size(); j++) {
                 tempStr = i+"";
                 Sensor sensor = sensorList.get(j);
                 if ( itemId == sensor.getSensorItemId()){
                     TreeVO child = new TreeVO();
                     child.setTitle(sensor.getSensorName());
-                    tempStr += "-"+j;
+                    tempStr += "-"+sensor.getSensorId();
                     child.setValue(tempStr);
                     child.setKey(tempStr);
                     //child.setChildren(null);
                     childList.add(child);
+                    jCount++;
                 }
             }
 

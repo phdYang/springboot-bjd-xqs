@@ -15,7 +15,7 @@ public class SensorMapperTest {
     private SensorMapper sensorMapper;
 
     @Test
-    public void getSensorName() {
+    public void getSensoIdTest(){
         System.out.println(sensorMapper.getSensorName("1"));
     }
 }
