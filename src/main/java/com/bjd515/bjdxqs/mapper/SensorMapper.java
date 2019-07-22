@@ -22,7 +22,7 @@ import java.util.List;
 @Mapper
 public interface SensorMapper {
 
-    @Select("SELECT ts.SensorId,ts.SensorCode,ts.SensorName,tsty.typeName,tsta.targetName,tls.sectionName " +
+    @Select("SELECT ts.SensorId,ts.SensorCode,ts.SensorName,ts.SensorItemId,tsty.typeName,tsta.targetName,tls.sectionName " +
             "FROM t_sensor as ts,t_sensor_type as tsty,t_sensor_target as tsta,t_location_section as tls " +
             "where ts.TypeId = tsty.typeId and ts.targetId = tsta.targetId and ts.sectionId = tls.sectionId" +
             " and ts.isValid=1")
@@ -74,6 +74,9 @@ public interface SensorMapper {
     @Update("update t_sensor set isValid=0" +
             " where sensorId=#{sensorId}")
     public int sensorDel(Sensor sensor);
+
+    @Select("select sensorName from t_sensor where sensorId =#{1}")
+    public String getSensorName(String sensorId);
 
 
 }

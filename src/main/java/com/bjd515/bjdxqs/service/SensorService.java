@@ -1,5 +1,6 @@
 package com.bjd515.bjdxqs.service;
 
+import com.bjd515.bjdxqs.Vo.TreeVO;
 import com.bjd515.bjdxqs.model.Sensor;
 
 import java.util.List;
@@ -25,5 +26,7 @@ public interface SensorService {
     public int sensorEdited(Sensor sensor) ;
 
     public int sensorDel(Sensor sensor) ;
+
+    public List<TreeVO> getTreeSensor();
 
 }

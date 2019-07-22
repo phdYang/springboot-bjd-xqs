@@ -3,10 +3,13 @@ package com.bjd515.bjdxqs.controller;
 import com.bjd515.bjdxqs.Vo.DataVO;
 import com.bjd515.bjdxqs.Vo.ObjVO;
 import com.bjd515.bjdxqs.Vo.ResultVO;
+import com.bjd515.bjdxqs.Vo.TreeVO;
 import com.bjd515.bjdxqs.model.Sensor;
 import com.bjd515.bjdxqs.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Classname SensorController
@@ -149,6 +152,18 @@ public class SensorController {
             result.setMsg("删除失败");
             result.setResult(null);
         }
+        return result;
+    }
+
+
+    @PostMapping("/getTreeSensor")
+    public ResultVO<DataVO> getTreeSensor(){
+        ResultVO<DataVO> result = new ResultVO<>();
+        DataVO data = new DataVO();
+        data.setData(sensorService.getTreeSensor());
+        result.setCode(0);
+        result.setMsg("查询成功");
+        result.setResult(data);
         return result;
     }
 
