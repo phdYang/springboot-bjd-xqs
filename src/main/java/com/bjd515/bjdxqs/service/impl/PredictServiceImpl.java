@@ -26,7 +26,7 @@ public class PredictServiceImpl implements PredictService {
         // 1.2 处理时间问题
         // 1.2.1 参数是1或者7
         // 1.3 保存模型 获得的是在路径下的地址D:/XXX/XXX/modelSave/xxxx.xx
-        
+
 
         // 2.1 根据时间，sID 得到 之前七天的数据 作为模型的输入数据
         // 2.2 根据模型路径拿到模型，并调用模型；如 python xxx.py inputdir outputdir
